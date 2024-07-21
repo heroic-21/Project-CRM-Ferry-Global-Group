@@ -51,8 +51,8 @@
 	<div class="card">
 		<div class="p-5">
 			<div class="flex justify-between">
-				<div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-red-100">
-					<i class="mgc_delete_line text-4xl text-red-500"></i>
+				<div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-rose-100">
+					<i class="mgc_history_line text-4xl text-rose-500"></i>
 				</div>
 				<div class="text-right">
                 <h3 class="text-gray-700 mt-1 text-2xl font-bold mb-5 dark:text-gray-300">{{$totalTiketBelum}}</h3>
@@ -66,7 +66,7 @@
 		<div class="p-5">
 			<div class="flex justify-between">
 				<div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-red-100">
-					<i class="mgc_delete_line text-4xl text-red-500"></i>
+					<i class="mgc_delete_back_line text-4xl text-red-500"></i>
 				</div>
 				<div class="text-right">
                 <h3 class="text-gray-700 mt-1 text-2xl font-bold mb-5 dark:text-gray-300">{{$totalTiketBatal}}</h3>
@@ -79,8 +79,8 @@
     <div class="card">
 		<div class="p-5">
 			<div class="flex justify-between">
-				<div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-green-100">
-					<i class="mgc_check_line text-4xl text-green-500"></i>
+				<div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-indigo-100">
+					<i class="mgc_bank_card_fill text-4xl text-indigo-500"></i>
 				</div>
 				<div class="text-right">
 					<h3 class="text-gray-700 mt-1 text-2xl font-bold mb-5 dark:text-gray-300">{{ $totalTiketPremium }}</h3>
@@ -93,8 +93,8 @@
     <div class="card">
 		<div class="p-5">
 			<div class="flex justify-between">
-				<div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-green-100">
-					<i class="mgc_check_line text-4xl text-green-500"></i>
+				<div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-cyan-100">
+					<i class="mgc_bank_card_line text-4xl text-cyan-500"></i>
 				</div>
 				<div class="text-right">
 					<h3 class="text-gray-700 mt-1 text-2xl font-bold mb-5 dark:text-gray-300">{{ $totalTiketBiasa }}</h3>
@@ -113,10 +113,9 @@
                 <input type="text" id="searchInput" placeholder="Search..." class="hidden border-0 w-[23rem] lg:flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm hover:ring-slate-300 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700">
             </div>
             <div class="flex flex-wrap gap-2">
-                <button type="button" class="btn bg-success/25 text-lg font-medium text-success hover:text-white hover:bg-success">
-                    <i class="mgc_settings_3_line"></i>
-                </button>
-                <button type="button" class="btn bg-dark/25 text-sm font-medium text-slate-900 dark:text-slate-200/70 hover:text-white hover:bg-dark/90">Import</button>
+                <a type="button" class="btn bg-success text-sm font-medium text-white hover:text-white hover:bg-success">
+                    <i class="mgc_add_circle_fill"></i>
+                </a>
                 <button type="button" class="btn bg-dark/25 text-sm font-medium text-slate-900 dark:text-slate-200/70 hover:text-white hover:bg-dark/90">Export</button>
             </div>
         </div>
@@ -146,22 +145,35 @@
                         <td class="whitespace-nowrap py-4 pe-3 text-sm font-medium text-gray-900 dark:text-gray-200">{{ $tiket->way }}</td>
                         <td class="whitespace-nowrap py-4 pe-3 text-sm font-medium text-gray-900 dark:text-gray-200">{{ $tiket->jenis_pembayaran }}</td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <div class="inline-flex items-center gap-1.5 py-1 px-3 rounded text-xs font-medium bg-warning/25 text-warning">{{ $tiket->kelas_tiket }}</div>
+                            @if($tiket->kelas_tiket == "Biasa")
+                                <div class="inline-flex items-center gap-1.5 py-1 px-3 rounded text-xs font-medium bg-blue-700/25 text-blue-700">{{ $tiket->kelas_tiket }}</div>
+                            @else
+                                <div class="inline-flex items-center gap-1.5 py-1 px-3 rounded text-xs font-medium bg-yellow-700/25 text-yellow-700">{{ $tiket->kelas_tiket }}</div>
+                            @endif
                         </td>
                         <td class="whitespace-nowrap py-4 pe-3 text-sm font-medium text-gray-900 dark:text-gray-200">{{ $tiket->deparature_date }}</td>
                         <td class="whitespace-nowrap py-4 pe-3 text-sm font-medium text-gray-900 dark:text-gray-200">{{ $tiket->deparature_time }}</td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <div class="inline-flex items-center gap-1.5 py-1 px-3 rounded text-xs font-medium bg-warning/25 text-warning">{{ $tiket->status_tiket }}</div>
+                            @if($tiket->status_tiket == "Batal")
+                                <div class="inline-flex items-center gap-1.5 py-1 px-3 rounded text-xs font-medium bg-red-700/25 text-red-700">{{ $tiket->status_tiket }}</div>
+                            @elseif($tiket->status_tiket == "Tertunda")
+                                <div class="inline-flex items-center gap-1.5 py-1 px-3 rounded text-xs font-medium bg-yellow-700/25 text-yellow-700">{{ $tiket->status_tiket }}</div>
+                            @elseif($tiket->status_tiket == "Sudah Berangkat")
+                                <div class="inline-flex items-center gap-1.5 py-1 px-3 rounded text-xs font-medium bg-green-700/25 text-green-700">{{ $tiket->status_tiket }}</div>
+                            @else
+                                <div class="inline-flex items-center gap-1.5 py-1 px-3 rounded text-xs font-medium bg-sky-700/25 text-sky-700">{{ $tiket->status_tiket }}</div>
+                            @endif
                         </td>
                         <td class="whitespace-nowrap py-4 px-3 text-center text-sm font-medium">
-                            <a href="javascript:void(0);" class="me-0.5">
+                            <button class="btn bg-primary text-white me-0.5" data-modal-target="#edit{{ $tiket->id_tiket }}">
                                 <i class="mgc_edit_line text-lg"></i>
-                            </a>
-                            <a href="{{ route('tickets.delete', ['id_tiket' => $tiket->id_tiket]) }}" class="ms-0.5">
+                            </button>
+                            <a class="btn bg-danger text-white me-0.5" href="{{ route('tickets.delete', ['id_tiket' => $tiket->id_tiket]) }}" class="ms-0.5">
                                 <i class="mgc_delete_line text-xl"></i>
                             </a>
                         </td>
                     </tr>
+                    @include('apps.editTickets', ['tiket' => $tiket])
                     @endforeach
                 </tbody>
             </table>
@@ -172,6 +184,44 @@
 
 @section('script')
     @vite(['resources/js/pages/table-gridjs.js'])
+    @vite(['resources/js/pages/highlight.js'])
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to show modal
+            function showModal(modalId) {
+                const modal = document.querySelector(modalId);
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('block');
+                }
+            }
+
+            // Function to hide modal
+            function hideModal(modalId) {
+                const modal = document.querySelector(modalId);
+                if (modal) {
+                    modal.classList.remove('block');
+                    modal.classList.add('hidden');
+                }
+            }
+
+            // Attach event listeners to buttons with data-modal-target attribute
+            document.querySelectorAll('[data-modal-target]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const modalId = button.getAttribute('data-modal-target');
+                    showModal(modalId);
+                });
+            });
+
+            // Attach event listeners to buttons with data-modal-dismiss attribute
+            document.querySelectorAll('[data-modal-dismiss]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const modalId = button.getAttribute('data-modal-dismiss');
+                    hideModal(modalId);
+                });
+            });
+        });
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const searchInput = document.getElementById('searchInput');

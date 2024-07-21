@@ -43,7 +43,7 @@ class GridDatatable {
                 },
                 ],
                 pagination: {
-                    limit: 5
+                    limit: 10
                 },
                 sort: true,
                 search: true,
@@ -60,6 +60,78 @@ class GridDatatable {
                     ["10", "Tyrone", "tyrone@example.com", "Senior Response Liaison", "Raynor, Rolfson and Daugherty", "Qatar"],
                 ]
             }).render(document.getElementById("table-gridjs"));
+
+        if (document.getElementById("table-gridjs-pelanggan")) {
+
+            // Mengambil data pelanggan dari window object
+            const dataPelanggan = window.dataPelanggan.map(pelanggan => [
+                pelanggan.id,
+                pelanggan.name,
+                pelanggan.email,
+                pelanggan.level,
+                pelanggan.jenis_kelamin,
+                pelanggan.no_hp,
+                pelanggan.domisili,
+                pelanggan.nomor_passport,
+                pelanggan.tanggal_lahir
+            ]);
+
+            // Membuat dan merender Grid.js
+            new Grid({
+                columns: [
+                    {
+                        name: 'ID',
+                        width: 'auto', // Mengatur lebar otomatis
+                        formatter: (cell) => html('<span class="fw-semibold">' + cell + '</span>')
+                    },
+                    {
+                        name: 'Name',
+                        width: 'auto', // Mengatur lebar otomatis
+                    },
+                    {
+                        name: 'Email',
+                        width: 'auto', // Mengatur lebar otomatis
+                        formatter: (cell) => html('<a href="mailto:' + cell + '">' + cell + '</a>')
+                    },
+                    {
+                        name: 'Level',
+                        width: 'auto', // Mengatur lebar otomatis
+                    },
+                    {
+                        name: 'Jenis Kelamin',
+                        width: 'auto', // Mengatur lebar otomatis
+                    },
+                    {
+                        name: 'Nomor HP',
+                        width: 'auto', // Mengatur lebar otomatis
+                    },
+                    {
+                        name: 'Domisili',
+                        width: 'auto', // Mengatur lebar otomatis
+                    },
+                    {
+                        name: 'Nomor Passport',
+                        width: 'auto', // Mengatur lebar otomatis
+                    },
+                    {
+                        name: 'Tanggal Lahir',
+                        width: 'auto', // Mengatur lebar otomatis
+                    },
+                    {
+                        name: 'Actions',
+                        width: '120px',
+                        formatter: () => html("<a href='#' class='text-reset text-decoration-underline'>Details</a>")
+                    },
+                ],
+                pagination: {
+                    limit: 20
+                },
+                sort: true,
+                search: true,
+                autoWidth: true, // Menyesuaikan lebar kolom secara otomatis
+                data: dataPelanggan
+            }).render(document.getElementById("table-gridjs-pelanggan"));
+        }
 
         // card Table
         if (document.getElementById("table-card"))

@@ -42,6 +42,21 @@
                 </a>
             </li>
 
+            <li class="menu-item">
+                <a href="{{ route('second', ['apps', 'pelanggan']) }}" class="menu-link">
+                    <span class="menu-icon"><i class="mgc_user_2_fill"></i></span>
+                    <span class="menu-text"> Pelanggan </span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="{{ route('second', ['apps', 'pelanggan']) }}" class="menu-link">
+                    <span class="menu-icon"><i class="mgc_user_4_fill"></i></span>
+                    <span class="menu-text"> Penumpang </span>
+                </a>
+            </li>
+
+
             <li class="menu-title">Custom</li>
 
             <li class="menu-item">

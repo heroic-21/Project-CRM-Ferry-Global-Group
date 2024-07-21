@@ -28,7 +28,7 @@ class DataTiketController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -39,33 +39,27 @@ class DataTiketController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id_tiket)
     {
-        //
+        $tiket = Ticket::findOrFail($id_tiket);
+        return view('apps.editTickets', compact('tiket'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id_tiket)
     {
-
+        $tiket = Ticket::findOrFail($id_tiket);
+        $this->validate($request, [
+            'rute'=>'required',
+        ]);
+        $tiket->save();
+        return redirect()->route('backTiket')->with('success', 'Tiket berhasil dihapus.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id_tiket)
     {
         $ticket = Ticket::where('id_tiket', $id_tiket)->first();
